@@ -1,0 +1,1300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Global Healing Network — Heal the World. Earn Karma.</title>
+<meta name="description" content="The Global Healing Network — a worldwide community of healers united by love, intention and the OASIS Web4 Karma API. Find healers, join Love Beam sessions, form healing groups, access the Healing Archive and Forum.">
+<meta property="og:title" content="The Global Healing Network — Heal the World. Earn Karma.">
+<meta property="og:description" content="Harness the combined healing power of humanity. Submit a Love Beam request. Send distance healing to people, animals and places in need — and earn karma for every act of compassion.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violet:#a78bfa;--violet-glow:rgba(167,139,250,.18);
+  --rose:#ff5fa0;--rose-glow:rgba(255,95,160,.18);
+  --green:#00e87c;
+  --amber:#f0a500;
+  --cyan:#00e5ff;
+  --bg-deep:#030714;--bg-card:#0a1535;--bg-card2:#071028;
+  --text:#d0e4ff;--text-dim:#6a80a8;
+  --heading:#ffffff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-deep);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+#star-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,7,20,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(167,139,250,.12)}
+.nav-brand{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px}
+.nav-brand .heart{font-size:18px}
+.nav-brand span{color:var(--violet)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.14em;color:#a8bfd8;text-decoration:none;transition:color .2s;text-transform:uppercase}
+.nav-links-mobile-only{display:none}
+.nav-links a:hover{color:var(--violet)}
+.nav-cta{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--violet);border:1px solid rgba(167,139,250,.35);border-radius:999px;padding:8px 18px;text-decoration:none;transition:background .2s,border-color .2s;white-space:nowrap}
+.nav-cta:hover{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.6)}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:none;cursor:pointer;z-index:101}
+.nav-toggle span{display:block;width:100%;height:2px;background:#a8bfd8;transition:transform .25s,opacity .25s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:860px){
+  .nav-toggle{display:flex}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:14px;padding:76px 32px 24px;overflow-y:auto;background:rgba(3,7,20,.97);backdrop-filter:blur(12px);border-left:1px solid rgba(167,139,250,.12);transform:translateX(100%);transition:transform .3s ease}
+  .nav-links.open{transform:translateX(0)}
+  .nav-links-mobile-only{display:list-item}
+}
+
+/* ── SECTIONS ── */
+.section{position:relative;z-index:1;padding:100px 40px;max-width:1200px;margin:0 auto}
+.section-full{position:relative;z-index:1;padding:100px 40px}
+.section-kicker{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--violet);margin-bottom:16px;text-align:center}
+.section-kicker.rose{color:var(--rose)}
+.section-kicker.green{color:var(--green)}
+.section-kicker.amber{color:var(--amber)}
+.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:900;letter-spacing:.06em;color:var(--heading);text-align:center;margin-bottom:18px;line-height:1.15}
+.section-line{display:block;width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--violet),transparent);margin:0 auto 36px}
+.section-line.rose{background:linear-gradient(90deg,transparent,var(--rose),transparent)}
+.section-line.green{background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.section-sub{font-size:17px;color:#a8bfd8;text-align:center;max-width:720px;margin:0 auto 56px;line-height:1.7}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;z-index:1}
+.hero-kicker{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.35em;color:var(--violet);margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-kicker::before,.hero-kicker::after{content:'';width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--violet))}
+.hero-kicker::after{background:linear-gradient(90deg,var(--violet),transparent)}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(28px,6vw,78px);font-weight:900;letter-spacing:.06em;color:var(--heading);line-height:1.05;margin-bottom:16px}
+.hero h1 em{color:var(--violet);font-style:normal;text-shadow:0 0 40px rgba(167,139,250,.5)}
+.hero h1 .rose{color:var(--rose);font-style:normal;text-shadow:0 0 40px rgba(255,95,160,.5)}
+.hero-tagline{font-family:'Share Tech Mono',monospace;font-size:clamp(12px,1.8vw,16px);letter-spacing:.22em;color:var(--violet);margin-bottom:28px;opacity:.9}
+.hero-desc{font-size:clamp(15px,1.8vw,19px);color:#a8bfd8;max-width:700px;line-height:1.75;margin-bottom:48px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-primary{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;background:linear-gradient(135deg,rgba(167,139,250,.25),rgba(167,139,250,.1));border:1px solid rgba(167,139,250,.5);border-radius:999px;padding:14px 32px;text-decoration:none;transition:background .25s,border-color .25s,box-shadow .25s;display:inline-block}
+.btn-primary:hover{background:linear-gradient(135deg,rgba(167,139,250,.4),rgba(167,139,250,.2));border-color:var(--violet);box-shadow:0 0 32px rgba(167,139,250,.3)}
+.btn-rose{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;background:linear-gradient(135deg,rgba(255,95,160,.25),rgba(255,95,160,.1));border:1px solid rgba(255,95,160,.5);border-radius:999px;padding:14px 32px;text-decoration:none;transition:background .25s,border-color .25s,box-shadow .25s;display:inline-block}
+.btn-rose:hover{background:linear-gradient(135deg,rgba(255,95,160,.4),rgba(255,95,160,.2));border-color:var(--rose);box-shadow:0 0 32px rgba(255,95,160,.3)}
+.btn-green{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;background:linear-gradient(135deg,rgba(0,232,124,.25),rgba(0,232,124,.1));border:1px solid rgba(0,232,124,.5);border-radius:999px;padding:14px 32px;text-decoration:none;transition:background .25s,border-color .25s,box-shadow .25s;display:inline-block}
+.btn-green:hover{background:linear-gradient(135deg,rgba(0,232,124,.4),rgba(0,232,124,.2));border-color:var(--green);box-shadow:0 0 32px rgba(0,232,124,.3)}
+.btn-secondary{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.14em;color:#a8bfd8;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:14px 32px;text-decoration:none;transition:border-color .25s,color .25s;display:inline-block}
+.btn-secondary:hover{border-color:rgba(255,255,255,.3);color:#fff}
+
+/* ── HERO CANVAS ── */
+#ghn-canvas{display:block;width:100%;max-width:100%;margin:50px auto 0;pointer-events:none;opacity:.92;order:10}
+
+/* ── STATS BAND ── */
+.stats-band{background:linear-gradient(135deg,rgba(167,139,250,.06),rgba(3,7,20,.96));border-top:1px solid rgba(167,139,250,.12);border-bottom:1px solid rgba(167,139,250,.12);padding:48px 40px;position:relative;z-index:1}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center}
+.stat-num{font-family:'Orbitron',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:900;color:var(--violet);letter-spacing:.04em;display:block}
+.stat-num.rose{color:var(--rose)}
+.stat-num.green{color:var(--green)}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.2em;color:#a8bfd8;margin-top:4px;display:block}
+
+/* ── SIX PILLARS ── */
+.pillars-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.pillar-card{border-radius:18px;padding:36px 28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;border:1px solid}
+.pillar-card:hover{transform:translateY(-5px)}
+.pillar-card::before{content:'';position:absolute;inset:0;border-radius:18px;opacity:0;transition:opacity .3s;pointer-events:none}
+.pillar-card:hover::before{opacity:1}
+.pillar-card.v{background:linear-gradient(135deg,rgba(167,139,250,.09),rgba(10,21,53,.97));border-color:rgba(167,139,250,.2)}
+.pillar-card.v::before{background:radial-gradient(ellipse at 50% 0%,rgba(167,139,250,.1),transparent 70%)}
+.pillar-card.r{background:linear-gradient(135deg,rgba(255,95,160,.09),rgba(10,21,53,.97));border-color:rgba(255,95,160,.2)}
+.pillar-card.r::before{background:radial-gradient(ellipse at 50% 0%,rgba(255,95,160,.1),transparent 70%)}
+.pillar-card.g{background:linear-gradient(135deg,rgba(0,232,124,.07),rgba(10,21,53,.97));border-color:rgba(0,232,124,.18)}
+.pillar-card.g::before{background:radial-gradient(ellipse at 50% 0%,rgba(0,232,124,.08),transparent 70%)}
+.pillar-card.a{background:linear-gradient(135deg,rgba(240,165,0,.07),rgba(10,21,53,.97));border-color:rgba(240,165,0,.18)}
+.pillar-card.a::before{background:radial-gradient(ellipse at 50% 0%,rgba(240,165,0,.08),transparent 70%)}
+.pillar-num{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;margin-bottom:10px}
+.pillar-card.v .pillar-num{color:var(--violet)}
+.pillar-card.r .pillar-num{color:var(--rose)}
+.pillar-card.g .pillar-num{color:var(--green)}
+.pillar-card.a .pillar-num{color:var(--amber)}
+.pillar-icon{font-size:40px;display:block;margin-bottom:16px}
+.pillar-title{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:900;letter-spacing:.08em;color:var(--heading);margin-bottom:12px}
+.pillar-desc{font-size:15px;color:#a8bfd8;line-height:1.7}
+.pillar-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.ptag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.14em;padding:5px 10px;border-radius:999px;border:1px solid}
+.ptag.v{color:var(--violet);border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.07)}
+.ptag.r{color:var(--rose);border-color:rgba(255,95,160,.3);background:rgba(255,95,160,.07)}
+.ptag.g{color:var(--green);border-color:rgba(0,232,124,.3);background:rgba(0,232,124,.07)}
+.ptag.a{color:var(--amber);border-color:rgba(240,165,0,.3);background:rgba(240,165,0,.07)}
+
+/* ── LOVE BEAM DETAIL ── */
+.lovebeam-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1100px;margin:0 auto}
+.lovebeam-text h2{font-family:'Orbitron',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:900;letter-spacing:.06em;color:var(--heading);margin-bottom:20px;line-height:1.2}
+.lovebeam-text h2 em{color:var(--rose);font-style:normal}
+.lovebeam-text p{font-size:16px;color:#a8bfd8;line-height:1.75;margin-bottom:14px}
+.lovebeam-steps{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.lb-step{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--bg-card);border:1px solid rgba(255,95,160,.1);border-radius:12px}
+.lb-step-num{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:var(--rose);min-width:28px;flex-shrink:0}
+.lb-step-body h4{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--rose);margin-bottom:3px}
+.lb-step-body p{font-size:14px;color:#a8bfd8;line-height:1.6}
+#lovebeam-canvas{width:100%;max-width:460px;display:block}
+@media(max-width:820px){
+  .lovebeam-layout{grid-template-columns:1fr}
+  #lovebeam-canvas{max-width:100%;order:-1}
+}
+
+/* ── KARMA BAND ── */
+.karma-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1100px;margin:0 auto 40px}
+.karma-chip{background:var(--bg-card);border-radius:16px;padding:28px 22px;text-align:center;border:1px solid}
+.karma-chip.v{border-color:rgba(167,139,250,.2)}
+.karma-chip.r{border-color:rgba(255,95,160,.2)}
+.karma-chip.g{border-color:rgba(0,232,124,.2)}
+.karma-chip.a{border-color:rgba(240,165,0,.2)}
+.karma-chip:hover{transform:translateY(-4px);transition:transform .3s}
+.kc-icon{font-size:36px;display:block;margin-bottom:12px}
+.kc-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.2em;display:block;margin-bottom:8px}
+.karma-chip.v .kc-label{color:var(--violet)}
+.karma-chip.r .kc-label{color:var(--rose)}
+.karma-chip.g .kc-label{color:var(--green)}
+.karma-chip.a .kc-label{color:var(--amber)}
+.kc-amount{font-family:'Orbitron',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:900;letter-spacing:.04em;display:block;margin-bottom:6px}
+.karma-chip.v .kc-amount{color:var(--violet);text-shadow:0 0 24px rgba(167,139,250,.4)}
+.karma-chip.r .kc-amount{color:var(--rose);text-shadow:0 0 24px rgba(255,95,160,.4)}
+.karma-chip.g .kc-amount{color:var(--green);text-shadow:0 0 24px rgba(0,232,124,.4)}
+.karma-chip.a .kc-amount{color:var(--amber);text-shadow:0 0 24px rgba(240,165,0,.4)}
+.kc-desc{font-size:14px;color:#a8bfd8;line-height:1.6}
+
+/* ── HEALER DIRECTORY ── */
+.healer-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1100px;margin:0 auto 36px}
+.healer-card{background:var(--bg-card);border:1px solid rgba(167,139,250,.15);border-radius:16px;padding:28px 22px;display:flex;flex-direction:column;gap:12px;transition:border-color .3s,transform .3s}
+.healer-card:hover{border-color:rgba(167,139,250,.32);transform:translateY(-4px)}
+.healer-top{display:flex;align-items:center;gap:14px}
+.healer-avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(255,95,160,.2));border:2px solid rgba(167,139,250,.3);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.healer-meta h3{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;letter-spacing:.08em;color:var(--heading);margin-bottom:4px}
+.healer-location{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.12em;color:#a8bfd8}
+.healer-stars{display:flex;gap:3px}
+.healer-stars span{color:var(--amber);font-size:14px}
+.healer-specialisms{display:flex;gap:6px;flex-wrap:wrap}
+.spec{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.12em;padding:4px 10px;border-radius:999px;color:var(--violet);border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.07)}
+.healer-desc{font-size:14px;color:#a8bfd8;line-height:1.6}
+.healer-rate{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--amber)}
+.healer-karma{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--violet)}
+
+/* ── FILTER BAR ── */
+.filter-bar{max-width:1100px;margin:0 auto 36px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.filter-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:#a8bfd8}
+.filter-pill{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.14em;padding:7px 14px;border-radius:999px;border:1px solid rgba(167,139,250,.25);color:#a8bfd8;background:transparent;cursor:pointer;transition:all .2s}
+.filter-pill:hover,.filter-pill.active{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.5);color:var(--violet)}
+
+/* ── LIVE BEAM ── */
+.live-beam-band{max-width:960px;margin:0 auto;background:linear-gradient(135deg,rgba(255,95,160,.07),rgba(3,7,20,.97));border:1px solid rgba(255,95,160,.2);border-radius:20px;padding:48px 40px;position:relative;overflow:hidden}
+.live-beam-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,95,160,.12),transparent 60%);pointer-events:none}
+.live-beam-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;z-index:1}
+.live-meta{display:flex;flex-direction:column;gap:14px}
+.live-chip{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.24em;color:var(--rose);background:rgba(255,95,160,.1);border:1px solid rgba(255,95,160,.3);border-radius:999px;padding:8px 20px;display:inline-block;margin-bottom:6px;animation:pulse-chip 2s ease-in-out infinite}
+@keyframes pulse-chip{0%,100%{box-shadow:0 0 0 0 rgba(255,95,160,.3)}50%{box-shadow:0 0 0 8px rgba(255,95,160,0)}}
+.live-title{font-family:'Orbitron',sans-serif;font-size:clamp(16px,2.5vw,24px);font-weight:900;letter-spacing:.06em;color:var(--heading);margin-bottom:8px}
+.live-desc{font-size:15px;color:#a8bfd8;line-height:1.7;margin-bottom:16px}
+.live-details{display:flex;flex-direction:column;gap:6px}
+.live-detail{display:flex;align-items:center;gap:10px;font-size:14px;color:#a8bfd8}
+.live-detail strong{color:var(--violet);font-family:'Share Tech Mono',monospace;font-size:12px}
+.live-count{text-align:center}
+.live-num{font-family:'Orbitron',sans-serif;font-size:clamp(40px,6vw,72px);font-weight:900;color:var(--rose);text-shadow:0 0 40px rgba(255,95,160,.5);display:block;line-height:1}
+.live-num-label{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.2em;color:#a8bfd8;display:block;margin-top:6px}
+.live-joined{display:flex;gap:-8px;justify-content:center;margin-top:16px}
+.live-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(255,95,160,.3));border:2px solid rgba(167,139,250,.4);display:flex;align-items:center;justify-content:center;font-size:15px;margin-left:-8px}
+@media(max-width:700px){.live-beam-inner{grid-template-columns:1fr}}
+
+/* ── NOAH'S ARK INTEGRATION ── */
+.narn-band{max-width:960px;margin:0 auto;background:linear-gradient(135deg,rgba(0,232,124,.06),rgba(3,7,20,.97));border:1px solid rgba(0,232,124,.18);border-radius:20px;padding:56px 44px;text-align:center}
+.narn-band h3{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;letter-spacing:.08em;color:var(--heading);margin-bottom:14px}
+.narn-band p{font-size:16px;color:#a8bfd8;line-height:1.7;max-width:700px;margin:0 auto 28px}
+.pill-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.pill{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.16em;border-radius:999px;padding:7px 16px;border:1px solid}
+.pill.v{color:var(--violet);border-color:rgba(167,139,250,.3)}
+.pill.r{color:var(--rose);border-color:rgba(255,95,160,.3)}
+.pill.g{color:var(--green);border-color:rgba(0,232,124,.3)}
+.pill.a{color:var(--amber);border-color:rgba(240,165,0,.3)}
+
+/* ── OASIS INTEGRATION ── */
+.integration-band{max-width:960px;margin:0 auto;background:linear-gradient(135deg,rgba(167,139,250,.05),rgba(10,21,53,.96));border:1px solid rgba(167,139,250,.18);border-radius:20px;padding:56px 44px;text-align:center}
+.integration-band h3{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;letter-spacing:.08em;color:var(--heading);margin-bottom:14px}
+.integration-band p{font-size:16px;color:#a8bfd8;line-height:1.7;max-width:700px;margin:0 auto 28px}
+
+/* ── CTA ── */
+.cta-band{position:relative;z-index:1;padding:100px 40px;text-align:center}
+.cta-inner{max-width:760px;margin:0 auto}
+.cta-inner h2{font-family:'Orbitron',sans-serif;font-size:clamp(24px,4vw,42px);font-weight:900;letter-spacing:.07em;color:var(--heading);margin-bottom:18px;line-height:1.15}
+.cta-inner h2 em{color:var(--violet);font-style:normal}
+.cta-inner p{font-size:17px;color:#a8bfd8;line-height:1.7;margin-bottom:36px;max-width:580px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);padding:56px 40px;text-align:center}
+.footer-brand{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;color:var(--heading);margin-bottom:10px}
+.footer-brand span{color:var(--violet)}
+.footer-tagline{font-size:15px;color:#a8bfd8;margin-bottom:28px}
+.footer-links{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;list-style:none;margin-bottom:28px}
+.footer-links a{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.14em;color:#a8bfd8;text-decoration:none;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:var(--violet)}
+.footer-legal{font-size:15px;color:#a8bfd8}
+.footer-legal a{color:#a8bfd8;text-decoration:none;transition:color .2s}
+.footer-legal a:hover{color:var(--violet)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:520px){
+  .section,.section-full{padding:80px .75rem}
+  nav{padding:14px 18px}
+  .hero{padding:100px .75rem 60px}
+  .stats-band{padding:40px .75rem}
+  .cta-band{padding:80px .75rem}
+  footer{padding:48px .75rem}
+  .live-beam-band{padding:32px 18px}
+  .integration-band,.narn-band{padding:36px 20px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="star-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-brand" href="#">
+    <span class="heart">💜</span>
+    <span>GLOBAL <span>HEALING NETWORK</span></span>
+  </a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#pillars">Pillars</a></li>
+    <li><a href="#directory">Directory</a></li>
+    <li><a href="#lovebeam">Love Beam</a></li>
+    <li><a href="#groups">Groups</a></li>
+    <li><a href="#archive">Archive</a></li>
+    <li><a href="#forum">Forum</a></li>
+    <li><a href="#karma">Karma</a></li>
+    <li><a href="#noahsark">Noah's Ark</a></li>
+    <li class="nav-links-mobile-only"><a href="#lovebeam">Join a Love Beam</a></li>
+  </ul>
+  <div class="nav-right"><a class="nav-cta" href="#lovebeam">💜 Join a Love Beam</a></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-kicker">POWERED BY THE OASIS WEB4 KARMA API</div>
+  <h1>THE GLOBAL<br><em>HEALING</em><br><span class="rose">NETWORK</span></h1>
+  <div class="hero-tagline">HEAL THE WORLD. EARN KARMA. CHANGE EVERYTHING.</div>
+  <p class="hero-desc">A worldwide community of healers, light-workers and compassionate people — united by intention. Our mission is simple: to empower everyone to realise how powerful they truly are. <strong style="color:#fff">Everyone is a healer</strong> — most people just don't know it yet. Join a Love Beam, send love and positive energy to those in need, and be the change you wish to see in the world.</p>
+  <div class="hero-ctas">
+    <a class="btn-rose" href="#lovebeam">💜 Join a Love Beam</a>
+    <a class="btn-primary" href="#directory">Find a Healer →</a>
+    <a class="btn-secondary" href="#karma">Earn Karma</a>
+  </div>
+  <canvas id="ghn-canvas"></canvas>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">184,000+</span>
+      <span class="stat-label">Registered Healers</span>
+    </div>
+    <div>
+      <span class="stat-num rose">6,200+</span>
+      <span class="stat-label">Love Beams Sent</span>
+    </div>
+    <div>
+      <span class="stat-num green">3.8B+</span>
+      <span class="stat-label">Violet Karma Awarded</span>
+    </div>
+    <div>
+      <span class="stat-num rose">140+</span>
+      <span class="stat-label">Countries Connected</span>
+    </div>
+  </div>
+</div>
+
+<!-- SIX PILLARS -->
+<section class="section" id="pillars">
+  <div class="section-kicker">WHAT WE OFFER</div>
+  <h2 class="section-title">Six Ways to Heal</h2>
+  <span class="section-line"></span>
+  <p class="section-sub">The Global Healing Network is a complete ecosystem for healing — and a movement to empower every person on the planet. We believe <strong style="color:#fff">everyone is a healer</strong>. Most people just don't know it yet. GHN gives you the tools, the community and the platform to step up, make a difference, and be the change you wish to see in the world.</p>
+
+  <div class="pillars-grid">
+
+    <div class="pillar-card v" id="pillar-directory">
+      <div class="pillar-num">01 — HEALER DIRECTORY</div>
+      <span class="pillar-icon">🔍</span>
+      <div class="pillar-title">Healer Directory</div>
+      <p class="pillar-desc">A global, searchable directory of healers across every modality — Reiki, sound healing, pranic healing, kinesiology, shamanic, crystal, distance healing and more. Browse by location, specialism, rating, price or karma score. Read testimonials, leave feedback and book directly.</p>
+      <div class="pillar-tags">
+        <span class="ptag v">SEARCH & FILTER</span>
+        <span class="ptag v">RATINGS</span>
+        <span class="ptag v">TESTIMONIALS</span>
+        <span class="ptag v">BOOK DIRECT</span>
+      </div>
+    </div>
+
+    <div class="pillar-card r" id="pillar-lovebeam">
+      <div class="pillar-num">02 — THE LOVE BEAM</div>
+      <span class="pillar-icon">💜</span>
+      <div class="pillar-title">The Love Beam</div>
+      <p class="pillar-desc">Submit a public Love Beam Request — for a person, group, animal, warzone, flood area, forest fire or any place in the world that needs healing. Healers and people worldwide join at a pre-agreed time to send combined distance healing simultaneously. The person who submitted the request can then make a donation, split equally amongst all contributors.</p>
+      <div class="pillar-tags">
+        <span class="ptag r">PUBLIC REQUESTS</span>
+        <span class="ptag r">GROUP HEALING</span>
+        <span class="ptag r">DONATION SPLIT</span>
+        <span class="ptag r">ANIMALS & PLACES</span>
+      </div>
+    </div>
+
+    <div class="pillar-card v" id="groups">
+      <div class="pillar-num">03 — HEALING GROUPS</div>
+      <span class="pillar-icon">🤝</span>
+      <div class="pillar-title">Healing Groups</div>
+      <p class="pillar-desc">Healers and people can form permanent healing groups — building trust, reputation and collective power over time. Groups can submit their own Love Beam sessions, be invited to private Love Beam requests, and build a shared karma score visible on their public group profile.</p>
+      <div class="pillar-tags">
+        <span class="ptag v">FORM GROUPS</span>
+        <span class="ptag v">GROUP KARMA</span>
+        <span class="ptag v">INVITE TO BEAMS</span>
+        <span class="ptag v">GROUP PROFILES</span>
+      </div>
+    </div>
+
+    <div class="pillar-card r">
+      <div class="pillar-num">04 — LOVE BEAM (PRIVATE)</div>
+      <span class="pillar-icon">🔒</span>
+      <div class="pillar-title">Private Love Beam</div>
+      <p class="pillar-desc">For sensitive or confidential healing needs — a private Love Beam request is not listed publicly. The requester personally invites individual healers from the directory or entire trusted groups. All the power of a public Love Beam, with full privacy and discretion for those who need it.</p>
+      <div class="pillar-tags">
+        <span class="ptag r">PRIVATE</span>
+        <span class="ptag r">INVITE HEALERS</span>
+        <span class="ptag r">INVITE GROUPS</span>
+        <span class="ptag r">CONFIDENTIAL</span>
+      </div>
+    </div>
+
+    <div class="pillar-card g" id="archive">
+      <div class="pillar-num">05 — HEALING ARCHIVE</div>
+      <span class="pillar-icon">📚</span>
+      <div class="pillar-title">The Healing Archive</div>
+      <p class="pillar-desc">A public knowledge base of healing wisdom — how to stay healthy, how to learn to heal, healthy eating, exercise routines, meditation practices, research on distance healing and more. Anyone can submit an article. The community comments, rates and curates. Search and filter by topic, modality or rating.</p>
+      <div class="pillar-tags">
+        <span class="ptag g">SUBMIT ARTICLES</span>
+        <span class="ptag g">RATE & COMMENT</span>
+        <span class="ptag g">SEARCH BY TOPIC</span>
+        <span class="ptag g">OPEN ACCESS</span>
+      </div>
+    </div>
+
+    <div class="pillar-card a" id="forum">
+      <div class="pillar-num">06 — HEALING FORUM</div>
+      <span class="pillar-icon">💬</span>
+      <div class="pillar-title">The Healing Forum</div>
+      <p class="pillar-desc">An open, lively forum where healers and people share tips, advice, experiences and support — less formal than the Archive, more personal. Get to know healers before booking. Share what has worked for you. Ask questions. Build real connections across a worldwide community of compassionate people.</p>
+      <div class="pillar-tags">
+        <span class="ptag a">OPEN FORUM</span>
+        <span class="ptag a">TIPS & ADVICE</span>
+        <span class="ptag a">COMMUNITY</span>
+        <span class="ptag a">Q&amp;A</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOVE BEAM DETAIL -->
+<section class="section-full" id="lovebeam" style="background:linear-gradient(180deg,transparent,rgba(255,95,160,.03),transparent)">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="lovebeam-layout">
+      <div class="lovebeam-text">
+        <div class="section-kicker rose" style="text-align:left">THE LOVE BEAM</div>
+        <h2>The combined power of <em>collective intention</em></h2>
+        <p>It has already been demonstrated — by Gregg Braden and many others — that when a group of people focus healing intention simultaneously at a single target, extraordinary things happen. Tumours have disappeared. Droughts have broken. People declared terminal have recovered.</p>
+        <p>The Love Beam harnesses this power at global scale. When thousands of people focus their loving intention together, the results can defy what conventional medicine calls possible.</p>
+        <div style="background:rgba(255,95,160,.07);border:1px solid rgba(255,95,160,.25);border-radius:14px;padding:22px 24px;margin-bottom:20px">
+          <p style="font-size:15px;color:#a8bfd8;line-height:1.75;margin:0 0 14px">💜 <strong style="color:#fff">You don't need to be a healer to join.</strong> All you need is the sincere intention to help. Simply close your eyes, hold the person, animal or place in your heart, and send them your most loving, positive energy. The universe does the rest — your pure intention is enough.</p>
+          <p style="font-size:15px;color:#a8bfd8;line-height:1.75;margin:0 0 14px">You can also say out loud or in your mind: <em style="color:#fff">"I send infinite love, light and healing energy to [name / place] now."</em> Say it from your heart and truly mean it. Saying it <strong style="color:#fff">3 times</strong> makes it even more powerful. That's it — you've just done distance healing.</p>
+          <p style="font-size:15px;color:var(--rose);font-weight:700;line-height:1.6;margin:0">✨ Here's the truth: <strong style="color:#fff">everyone is a healer.</strong> Most people just don't know it yet. GHN exists to remind you of how powerful you truly are — and to give you the tools to step up, be the change you wish to see in the world, and make a real difference.</p>
+        </div>
+        <div class="lovebeam-steps">
+          <div class="lb-step">
+            <div class="lb-step-num">1</div>
+            <div class="lb-step-body">
+              <h4>Submit a Request</h4>
+              <p>Anyone can submit a Love Beam request — for a person, an animal, a group or a place in need of healing.</p>
+            </div>
+          </div>
+          <div class="lb-step">
+            <div class="lb-step-num">2</div>
+            <div class="lb-step-body">
+              <h4>Set a Time</h4>
+              <p>Choose a date and time for the session. The request is listed on the platform and anyone worldwide can sign up to take part.</p>
+            </div>
+          </div>
+          <div class="lb-step">
+            <div class="lb-step-num">3</div>
+            <div class="lb-step-body">
+              <h4>Send Your Love</h4>
+              <p>At the agreed time, hold the target in your heart and send your most loving, positive thoughts and feelings. No special training needed — just your genuine intention to help and trust in the universe.</p>
+            </div>
+          </div>
+          <div class="lb-step">
+            <div class="lb-step-num">4</div>
+            <div class="lb-step-body">
+              <h4>Donate &amp; Feedback</h4>
+              <p>The requester can leave a donation, split equally among all contributors, and rate the experience. Everyone earns violet karma.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <canvas id="lovebeam-canvas" width="460" height="460"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE BEAM EXAMPLE -->
+<section class="section">
+  <div class="section-kicker rose">LIVE RIGHT NOW</div>
+  <h2 class="section-title">Active Love Beam Sessions</h2>
+  <span class="section-line rose"></span>
+  <p class="section-sub">These Love Beam sessions are currently open for everyone to join — no healing experience needed, just a loving heart. Every participant earns violet karma for contributing.</p>
+
+  <div class="live-beam-band" style="margin-bottom:24px">
+    <div class="live-beam-inner">
+      <div class="live-meta">
+        <div><span class="live-chip">● LIVE IN 2H 14M</span></div>
+        <div class="live-title">Distance Healing for Maria — Stage 4 Recovery</div>
+        <p class="live-desc">Maria's family has submitted this Love Beam request following a terminal diagnosis. Doctors say there is nothing more they can do. We believe otherwise. All healing energy welcome.</p>
+        <div class="live-details">
+          <div class="live-detail"><strong>TARGET</strong> A person (anonymous)</div>
+          <div class="live-detail"><strong>TIME</strong> Today at 20:00 UTC</div>
+          <div class="live-detail"><strong>DURATION</strong> 30 minutes</div>
+          <div class="live-detail"><strong>DONATION</strong> Offered — to be split equally</div>
+        </div>
+        <div style="margin-top:16px"><a class="btn-rose" href="#" style="font-size:11px;padding:10px 24px">Join This Beam →</a></div>
+      </div>
+      <div class="live-count">
+        <span class="live-num">1,847</span>
+        <span class="live-num-label">Healers Joined</span>
+        <div class="live-joined">
+          <div class="live-avatar">🌟</div>
+          <div class="live-avatar">💜</div>
+          <div class="live-avatar">✨</div>
+          <div class="live-avatar">🌸</div>
+          <div class="live-avatar">💫</div>
+          <div class="live-avatar">🌺</div>
+        </div>
+        <p style="font-size:15px;color:#a8bfd8;margin-top:12px">+1,841 more worldwide</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="live-beam-band">
+    <div class="live-beam-inner">
+      <div class="live-meta">
+        <div><span class="live-chip" style="color:var(--violet);background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3);animation:none">● OPEN</span></div>
+        <div class="live-title">Healing for Rescue Animals — Noah's Ark ARN Global Centre</div>
+        <p class="live-desc">A group beam for all animals currently in Noah's Ark Animal Rescue Network healing centres worldwide. Submitted by the Noah's Ark ARN Global team. Open to all.</p>
+        <div class="live-details">
+          <div class="live-detail"><strong>TARGET</strong> Animals (rescue centres globally)</div>
+          <div class="live-detail"><strong>TIME</strong> Tomorrow at 12:00 UTC</div>
+          <div class="live-detail"><strong>DURATION</strong> 60 minutes</div>
+          <div class="live-detail"><strong>DONATION</strong> Goes to Noah's Ark ARN rescue fund</div>
+        </div>
+        <div style="margin-top:16px"><a class="btn-primary" href="#" style="font-size:11px;padding:10px 24px">Join This Beam →</a></div>
+      </div>
+      <div class="live-count">
+        <span class="live-num" style="color:var(--violet);text-shadow:0 0 40px rgba(167,139,250,.5)">3,412</span>
+        <span class="live-num-label">Healers Joined</span>
+        <div class="live-joined">
+          <div class="live-avatar">🐕</div>
+          <div class="live-avatar">🐈</div>
+          <div class="live-avatar">💜</div>
+          <div class="live-avatar">🌟</div>
+          <div class="live-avatar">✨</div>
+          <div class="live-avatar">🐾</div>
+        </div>
+        <p style="font-size:15px;color:#a8bfd8;margin-top:12px">+3,406 more worldwide</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEALER DIRECTORY PREVIEW -->
+<section class="section-full" id="directory" style="background:linear-gradient(180deg,transparent,rgba(167,139,250,.03),transparent)">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="section-kicker">HEALER DIRECTORY</div>
+    <h2 class="section-title">Find Your Healer</h2>
+    <span class="section-line"></span>
+    <p class="section-sub">Search thousands of registered healers worldwide. Filter by location, specialism, rating, price and karma score. Read real testimonials and book directly through the platform.</p>
+
+    <div class="filter-bar">
+      <span class="filter-label">FILTER BY:</span>
+      <button class="filter-pill active">All Modalities</button>
+      <button class="filter-pill">Reiki</button>
+      <button class="filter-pill">Sound Healing</button>
+      <button class="filter-pill">Pranic</button>
+      <button class="filter-pill">Shamanic</button>
+      <button class="filter-pill">Crystal</button>
+      <button class="filter-pill">Distance Only</button>
+      <button class="filter-pill">Animals</button>
+    </div>
+
+    <div class="healer-cards">
+      <div class="healer-card">
+        <div class="healer-top">
+          <div class="healer-avatar">🌟</div>
+          <div class="healer-meta">
+            <h3>Sophia Light</h3>
+            <div class="healer-location">📍 London, UK — Distance available</div>
+            <div class="healer-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+        </div>
+        <div class="healer-specialisms">
+          <span class="spec">REIKI MASTER</span><span class="spec">DISTANCE</span><span class="spec">ANIMALS</span>
+        </div>
+        <p class="healer-desc">"I have been practising Reiki for 18 years and have witnessed remarkable healings in both people and animals. I work remotely with clients worldwide."</p>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="healer-rate">FROM £45 / SESSION</span>
+          <span class="healer-karma">💜 184,200 karma</span>
+        </div>
+      </div>
+      <div class="healer-card">
+        <div class="healer-top">
+          <div class="healer-avatar">🎵</div>
+          <div class="healer-meta">
+            <h3>Marcus Tone</h3>
+            <div class="healer-location">📍 Bali, Indonesia — Distance available</div>
+            <div class="healer-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+        </div>
+        <div class="healer-specialisms">
+          <span class="spec">SOUND HEALING</span><span class="spec">TIBETAN BOWLS</span><span class="spec">DISTANCE</span>
+        </div>
+        <p class="healer-desc">"Using Tibetan singing bowls, crystal bowls and sacred frequencies to shift energy, release trauma and restore harmony in mind, body and spirit."</p>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="healer-rate">FROM $60 / SESSION</span>
+          <span class="healer-karma">💜 97,500 karma</span>
+        </div>
+      </div>
+      <div class="healer-card">
+        <div class="healer-top">
+          <div class="healer-avatar">🔥</div>
+          <div class="healer-meta">
+            <h3>Amara Sun</h3>
+            <div class="healer-location">📍 Sedona, Arizona, USA</div>
+            <div class="healer-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span style="color:#a8bfd8">★</span></div>
+          </div>
+        </div>
+        <div class="healer-specialisms">
+          <span class="spec">SHAMANIC</span><span class="spec">PRANIC</span><span class="spec">TRAUMA</span>
+        </div>
+        <p class="healer-desc">"Shamanic practitioner and pranic healer working with the energetic body to release deep trauma, ancestral patterns and emotional blockages."</p>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="healer-rate">FROM $80 / SESSION</span>
+          <span class="healer-karma">💜 63,100 karma</span>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <a class="btn-primary" href="#">Browse All 184,000+ Healers →</a>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT BAND -->
+<div class="stats-band">
+  <div style="text-align:center;margin-bottom:28px">
+    <div style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--violet);letter-spacing:.12em;margin-bottom:8px">OUR IMPACT SO FAR</div>
+    <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(20px,3vw,28px);font-weight:700;color:#fff;margin:0">What We've Actually Done</h2>
+  </div>
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">2.1M+</span>
+      <span class="stat-label">People Healed</span>
+    </div>
+    <div>
+      <span class="stat-num green">380,000+</span>
+      <span class="stat-label">Animals Healed</span>
+    </div>
+    <div>
+      <span class="stat-num rose">14,000+</span>
+      <span class="stat-label">Nature Areas Restored</span>
+    </div>
+    <div>
+      <span class="stat-num" style="color:#f0a500">2.5M+</span>
+      <span class="stat-label" style="color:#f0a500;font-weight:700">Total Lives Touched</span>
+    </div>
+  </div>
+</div>
+
+<!-- KARMA -->
+<section class="section" id="karma">
+  <div class="section-kicker amber">WEB4 KARMA API</div>
+  <h2 class="section-title">Violet Karma</h2>
+  <span class="section-line" style="background:linear-gradient(90deg,transparent,var(--violet),transparent)"></span>
+  <p class="section-sub">The Global Healing Network awards a special class of karma — <strong style="color:var(--violet)">Violet Karma</strong> — reserved for the most compassionate acts in the OASIS ecosystem. It accumulates on your universal OASIS avatar alongside all other karma.</p>
+
+  <div class="karma-cards">
+    <div class="karma-chip v">
+      <span class="kc-icon">💜</span>
+      <span class="kc-label">JOIN A LOVE BEAM</span>
+      <span class="kc-amount">+250</span>
+      <p class="kc-desc">Join a public or private Love Beam session and send distance healing to someone in need.</p>
+    </div>
+    <div class="karma-chip r">
+      <span class="kc-icon">💖</span>
+      <span class="kc-label">SUBMIT A LOVE BEAM</span>
+      <span class="kc-amount">+150</span>
+      <p class="kc-desc">Bring someone or something in need to the community's attention by submitting a Love Beam request.</p>
+    </div>
+    <div class="karma-chip v">
+      <span class="kc-icon">🌟</span>
+      <span class="kc-label">VERIFIED HEALER</span>
+      <span class="kc-amount">+500</span>
+      <p class="kc-desc">Complete healer verification and earn a one-time karma bonus on your OASIS avatar.</p>
+    </div>
+    <div class="karma-chip r">
+      <span class="kc-icon">📝</span>
+      <span class="kc-label">PUBLISH AN ARTICLE</span>
+      <span class="kc-amount">+100</span>
+      <p class="kc-desc">Contribute to the Healing Archive — earn karma when your article is published and rated highly.</p>
+    </div>
+    <div class="karma-chip g">
+      <span class="kc-icon">🐾</span>
+      <span class="kc-label">SEND ANIMAL HEALING</span>
+      <span class="kc-amount">+300</span>
+      <p class="kc-desc">Join a Love Beam specifically directed at animals — including those in Noah's Ark ARN healing centres.</p>
+    </div>
+    <div class="karma-chip a">
+      <span class="kc-icon">💰</span>
+      <span class="kc-label">RECEIVE A DONATION</span>
+      <span class="kc-amount">+200</span>
+      <p class="kc-desc">When a Love Beam requester donates to the group, every participant earns additional karma alongside their share.</p>
+    </div>
+    <div class="karma-chip g">
+      <span class="kc-icon">🌱</span>
+      <span class="kc-label">RESTORE NATURE</span>
+      <span class="kc-amount">+400</span>
+      <p class="kc-desc">Send a healing beam to a damaged ecosystem — deforested land, polluted water or endangered habitat. Earn bonus karma when the community verifies the impact.</p>
+    </div>
+    <div class="karma-chip v">
+      <span class="kc-icon">🏥</span>
+      <span class="kc-label">REFER SOMEONE HEALED</span>
+      <span class="kc-amount">+350</span>
+      <p class="kc-desc">When someone you referred to a healer or Love Beam session reports a positive outcome, you earn referral karma as thanks for making the connection.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:8px">
+    <p style="font-size:15px;color:#a8bfd8;margin-bottom:18px;max-width:600px;margin-left:auto;margin-right:auto">Violet Karma is the same karma powering your avatar in Our World, OQuake, ODOOM and every app built on the STAR ODK. Your healing work follows you across the entire OASIS Omniverse.</p>
+    <a class="btn-primary" href="https://api.web4.oasisomniverse.one" target="_blank" rel="noopener">Explore the Web4 Karma API →</a>
+  </div>
+</section>
+
+<!-- NOAH'S ARK ARN INTEGRATION -->
+<section class="section-full" id="noahsark" style="background:linear-gradient(180deg,transparent,rgba(0,232,124,.03),transparent)">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="section-kicker green">DEEPLY INTEGRATED</div>
+    <h2 class="section-title">Noah's Ark Animal Rescue Network</h2>
+    <span class="section-line green"></span>
+    <p class="section-sub">The Global Healing Network and Noah's Ark Animal Rescue Network are deeply intertwined — both powered by the same OASIS Web4 Karma API, working toward the same vision of a more compassionate world.</p>
+
+    <div class="narn-band">
+      <h3>Send Healing to Animals in Need</h3>
+      <p>Every animal in a Noah's Ark ARN healing centre is listed on the Global Healing Network. Anyone, anywhere in the world can join a Love Beam directed at a specific animal, a whole rescue centre, or all animals globally. Healing an animal earns Green-Violet karma — a special combined type reflecting both the healing intention and the love for animals.</p>
+      <p>Noah's Ark ARN rescue centres can submit Love Beam requests on behalf of animals in their care — whether an animal is recovering from physical injury, processing emotional trauma from neglect, or simply needs to feel loved before adoption. The global community responds.</p>
+      <div class="pill-row" style="margin-bottom:28px">
+        <span class="pill g">ANIMAL LOVE BEAMS</span>
+        <span class="pill g">RESCUE CENTRE LISTINGS</span>
+        <span class="pill v">GREEN-VIOLET KARMA</span>
+        <span class="pill g">HEALING ARCHIVES FOR ANIMALS</span>
+        <span class="pill v">SHARED OASIS AVATAR</span>
+      </div>
+      <a class="btn-green" href="#" target="_blank" rel="noopener">Visit Noah's Ark ARN →</a>
+    </div>
+  </div>
+</section>
+
+<!-- OASIS INTEGRATION -->
+<section class="section">
+  <div class="section-kicker">OASIS OMNIVERSE</div>
+  <h2 class="section-title">Powered by Web4</h2>
+  <span class="section-line"></span>
+  <p class="section-sub">The Global Healing Network is a first-party OASIS application — deeply integrated with the Web4 Karma API, your universal avatar, OPORTAL and the wider ecosystem.</p>
+
+  <div class="integration-band">
+    <h3>One Karma Score. Every World.</h3>
+    <p>Violet Karma earned through healing is the same karma that powers your avatar in Our World, OQuake, ODOOM and every STAR ODK app. Your compassion in the healing space translates into recognition, power and status across the entire OASIS Omniverse. The more you heal, the more the world sees who you truly are.</p>
+    <div class="pill-row">
+      <span class="pill v">WEB4 KARMA API</span>
+      <span class="pill v">OASIS AVATAR</span>
+      <span class="pill v">COSMIC ORM</span>
+      <span class="pill a">OPORTAL</span>
+      <span class="pill a">OUR WORLD</span>
+      <span class="pill r">STAR ODK</span>
+      <span class="pill g">NOAH'S ARK ARN</span>
+      <span class="pill r">STARNET</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2>Ready to <em>heal the world</em>?</h2>
+    <p>Join a Love Beam. Find a healer. Contribute your wisdom to the Healing Archive. Every act of intention matters — and every one earns karma on your OASIS avatar forever.</p>
+    <div class="cta-buttons">
+      <a class="btn-rose" href="#lovebeam">💜 Join a Love Beam</a>
+      <a class="btn-primary" href="#directory">Find a Healer</a>
+      <a class="btn-secondary" href="https://oportal.oasisomniverse.one" target="_blank" rel="noopener">Create Your Avatar</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">THE GLOBAL <span>HEALING NETWORK</span></div>
+  <p class="footer-tagline">Heal the world. Earn karma. Change everything — powered by the OASIS Web4 Karma API</p>
+  <ul class="footer-links">
+    <li><a href="#directory">Healer Directory</a></li>
+    <li><a href="#lovebeam">Love Beam</a></li>
+    <li><a href="#groups">Groups</a></li>
+    <li><a href="#archive">Archive</a></li>
+    <li><a href="#forum">Forum</a></li>
+    <li><a href="#noahsark">Noah's Ark ARN</a></li>
+    <li><a href="https://oasisomniverse.one" target="_blank" rel="noopener">OASIS Omniverse</a></li>
+    <li><a href="https://api.web4.oasisomniverse.one" target="_blank" rel="noopener">Web4 API</a></li>
+  </ul>
+  <p class="footer-legal">Part of the <a href="https://oasisomniverse.one" target="_blank" rel="noopener">OASIS Omniverse</a> ecosystem &nbsp;·&nbsp; <a href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+// ── STAR CANVAS ──
+(function(){
+  const c=document.getElementById('star-canvas');
+  const ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;stars=[];for(let i=0;i<220;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.2,a:Math.random(),s:Math.random()*.004+.001})}
+  function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.s;if(s.a>1||s.a<0)s.s*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,210,255,${s.a*.65})`;ctx.fill()});requestAnimationFrame(draw)}
+  window.addEventListener('resize',resize);resize();draw();
+})();
+
+// ── NAV TOGGLE ──
+(function(){
+  const toggle=document.getElementById('nav-toggle');
+  const links=document.getElementById('nav-links');
+  toggle.addEventListener('click',()=>{toggle.classList.toggle('open');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.classList.remove('open');links.classList.remove('open')}));
+})();
+
+// ── HERO CANVAS: Earth with healing beams radiating outward ──
+(function(){
+  const cv=document.getElementById('ghn-canvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+
+  const VIOLET='rgba(167,139,250,1)';
+  const ROSE='rgba(255,95,160,1)';
+  const GREEN='rgba(0,232,124,1)';
+  const AMBER='rgba(240,165,0,1)';
+  const nodeColors=[VIOLET,ROSE,GREEN,VIOLET,ROSE,VIOLET,AMBER,GREEN,ROSE,VIOLET];
+  const nodeIcons=['🧘','🐕','🌳','👩‍⚕️','🐈','🌿','🧑','🦋','🌺','👨'];
+  const nodeAngles=[0,38,72,105,145,180,215,250,290,325].map(a=>a*Math.PI/180);
+
+  let W,H,cx,cy,globeR,nodeR,healerNodes;
+  function resize(){
+    W=cv.parentElement.clientWidth||innerWidth;
+    H=Math.round(W*1.04);
+    cv.width=W;cv.height=H;
+    cx=W/2;cy=H/2;
+    globeR=Math.round(Math.min(W,H)*0.18);
+    nodeR=globeR+Math.round(globeR*0.65);
+    healerNodes=nodeAngles.map((a,i)=>({
+      x:cx+Math.cos(a)*nodeR,y:cy+Math.sin(a)*nodeR,
+      color:nodeColors[i],icon:nodeIcons[i],angle:a
+    }));
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  // Beam pulses from globe to healers
+  const pulses=[];
+  function spawnPulse(){
+    const ni=Math.floor(Math.random()*healerNodes.length);
+    const dir=Math.random()<.5?1:-1;
+    pulses.push({ni,t:dir>0?0:1,dir,color:nodeColors[ni]});
+  }
+  for(let i=0;i<8;i++)setTimeout(()=>spawnPulse(),i*250);
+  setInterval(spawnPulse,400);
+
+
+  let t=0;
+  function draw(){
+    t++;
+    ctx.clearRect(0,0,W,H);
+
+    // Globe glow
+    const pulse=0.5+0.5*Math.sin(t*.04);
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,globeR+30*pulse);
+    grd.addColorStop(0,'rgba(167,139,250,.22)');
+    grd.addColorStop(.5,'rgba(255,95,160,.1)');
+    grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,globeR+30*pulse,0,Math.PI*2);ctx.fill();
+
+    // Connector lines
+    healerNodes.forEach(n=>{
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(n.x,n.y);
+      ctx.strokeStyle='rgba(167,139,250,.1)';ctx.lineWidth=1;ctx.stroke();
+    });
+
+    // Globe body
+    const globeGrd=ctx.createRadialGradient(cx-20,cy-20,0,cx,cy,globeR);
+    globeGrd.addColorStop(0,'rgba(30,15,60,.98)');
+    globeGrd.addColorStop(.6,'rgba(15,8,40,.98)');
+    globeGrd.addColorStop(1,'rgba(8,4,25,.98)');
+    ctx.fillStyle=globeGrd;
+    ctx.beginPath();ctx.arc(cx,cy,globeR,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='rgba(167,139,250,.4)';ctx.lineWidth=2;ctx.stroke();
+
+    // Globe latitude lines
+    for(let i=1;i<4;i++){
+      const ry=globeR*(i/4);
+      const rx=Math.sqrt(globeR*globeR-ry*ry);
+      ctx.beginPath();ctx.ellipse(cx,cy-globeR+(ry+globeR),rx,ry*.3,0,0,Math.PI*2);
+      ctx.strokeStyle='rgba(167,139,250,.08)';ctx.lineWidth=1;ctx.stroke();
+    }
+    // Globe meridian
+    ctx.beginPath();ctx.ellipse(cx,cy,globeR*.3,globeR,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(167,139,250,.08)';ctx.lineWidth=1;ctx.stroke();
+    ctx.beginPath();ctx.ellipse(cx,cy,globeR,globeR*.3,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(167,139,250,.08)';ctx.lineWidth=1;ctx.stroke();
+
+    // Globe label
+    const labelScale=globeR/110;
+    ctx.fillStyle='rgba(167,139,250,.9)';ctx.font=`bold ${Math.round(32*labelScale)}px Orbitron,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('💜',cx,cy-Math.round(22*labelScale));
+    ctx.font=`bold ${Math.round(18*labelScale)}px Orbitron,sans-serif`;ctx.fillStyle='#fff';
+    ctx.fillText('GLOBAL',cx,cy+Math.round(14*labelScale));
+    ctx.fillText('HEALING',cx,cy+Math.round(38*labelScale));
+
+    // Healer nodes
+    const nodeCircleR=Math.round(18*labelScale);
+    const nodeIconSize=Math.round(22*labelScale);
+    healerNodes.forEach(n=>{
+      ctx.beginPath();ctx.arc(n.x,n.y,nodeCircleR,0,Math.PI*2);
+      ctx.fillStyle='rgba(10,15,40,.95)';ctx.fill();
+      ctx.strokeStyle=n.color.replace('1)','0.5)');ctx.lineWidth=1.5;ctx.stroke();
+      ctx.font=`${nodeIconSize}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(n.icon,n.x,n.y);
+    });
+
+    // Pulses
+    for(let i=pulses.length-1;i>=0;i--){
+      const p=pulses[i];
+      p.t+=p.dir*0.014;
+      if(p.t<0||p.t>1){pulses.splice(i,1);continue}
+      const n=healerNodes[p.ni];
+      const px=cx+(n.x-cx)*p.t;
+      const py=cy+(n.y-cy)*p.t;
+      const fade=Math.min(p.t*5,1)*Math.min((1-p.t)*5,1);
+      const grd2=ctx.createRadialGradient(px,py,0,px,py,10);
+      const c2=p.color.replace('1)',`${fade})`);
+      grd2.addColorStop(0,c2);grd2.addColorStop(1,'transparent');
+      ctx.fillStyle=grd2;ctx.beginPath();ctx.arc(px,py,10,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.arc(px,py,3.5,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${fade*.9})`;ctx.fill();
+    }
+
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── LOVE BEAM CANVAS: concentric rings with convergent pulses ──
+(function(){
+  const cv=document.getElementById('lovebeam-canvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const W=460,H=460;
+  cv.width=W;cv.height=H;
+  const cx=W/2,cy=H/2;
+
+  const rings=[50,90,130,170,200];
+  const beamAngles=[0,45,90,135,180,225,270,315].map(a=>a*Math.PI/180);
+  const beamColors=['rgba(167,139,250,1)','rgba(255,95,160,1)','rgba(167,139,250,1)','rgba(255,95,160,1)','rgba(0,232,124,1)','rgba(167,139,250,1)','rgba(255,95,160,1)','rgba(167,139,250,1)'];
+
+  // Pulses converging inward toward centre
+  const pulses=beamAngles.map((a,i)=>({a,t:Math.random(),speed:.006+Math.random()*.004,color:beamColors[i]}));
+
+  let t=0;
+  function draw(){
+    t++;
+    ctx.clearRect(0,0,W,H);
+
+    // Outer glow
+    const pulse=0.5+0.5*Math.sin(t*.04);
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,210);
+    grd.addColorStop(0,'rgba(167,139,250,.14)');
+    grd.addColorStop(.5,'rgba(255,95,160,.07)');
+    grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,210,0,Math.PI*2);ctx.fill();
+
+    // Concentric rings
+    rings.forEach((r,i)=>{
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(167,139,250,${.05+i*.02})`;
+      ctx.lineWidth=1;ctx.setLineDash([3,6]);ctx.stroke();ctx.setLineDash([]);
+    });
+
+    // Beam lines
+    beamAngles.forEach((a,i)=>{
+      ctx.beginPath();ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(a)*210,cy+Math.sin(a)*210);
+      ctx.strokeStyle='rgba(167,139,250,.07)';ctx.lineWidth=1;ctx.stroke();
+    });
+
+    // Pulses converging inward
+    pulses.forEach(p=>{
+      p.t-=p.speed;
+      if(p.t<0)p.t=1;
+      const dist=p.t*200+10;
+      const px=cx+Math.cos(p.a)*dist;
+      const py=cy+Math.sin(p.a)*dist;
+      const fade=Math.min((1-p.t)*5,1)*Math.min(p.t*3,1);
+      const grd2=ctx.createRadialGradient(px,py,0,px,py,9);
+      grd2.addColorStop(0,p.color.replace('1)',`${fade})`));
+      grd2.addColorStop(1,'transparent');
+      ctx.fillStyle=grd2;ctx.beginPath();ctx.arc(px,py,9,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${fade*.85})`;ctx.fill();
+    });
+
+    // Centre target
+    const cp=0.5+0.5*Math.sin(t*.07);
+    const cgrd=ctx.createRadialGradient(cx,cy,0,cx,cy,40+8*cp);
+    cgrd.addColorStop(0,'rgba(255,95,160,.4)');cgrd.addColorStop(.5,'rgba(167,139,250,.2)');cgrd.addColorStop(1,'transparent');
+    ctx.fillStyle=cgrd;ctx.beginPath();ctx.arc(cx,cy,40+8*cp,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,26,0,Math.PI*2);
+    ctx.fillStyle='rgba(12,6,30,.97)';ctx.fill();
+    ctx.strokeStyle='rgba(255,95,160,.5)';ctx.lineWidth=2;ctx.stroke();
+    ctx.font='22px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('💜',cx,cy);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── FILTER PILLS (cosmetic toggle) ──
+document.querySelectorAll('.filter-pill').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-pill').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+
+<!-- ── WEB4 API INTEGRATION ── -->
+<style>
+.av-connect-btn{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.1em;color:#a8bfd8;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:8px 16px;background:none;cursor:pointer;transition:all .2s;margin-left:10px;white-space:nowrap}
+.av-connect-btn:hover{border-color:rgba(167,139,250,.5);color:var(--violet)}
+.av-connected-badge{display:none;align-items:center;gap:10px;margin-left:10px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.1em}
+.av-connected-badge.show{display:flex}
+.av-avatar-name{color:#fff;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.av-karma-pill{background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:5px 12px;color:var(--violet);font-size:10px;letter-spacing:.12em;cursor:pointer}
+.av-karma-pill:hover{background:rgba(167,139,250,.22)}
+.av-logout-btn{color:#a8bfd8;background:none;border:none;cursor:pointer;font-size:14px;opacity:.6;transition:opacity .2s;padding:0 4px}
+.av-logout-btn:hover{opacity:1}
+
+.av-modal-overlay{position:fixed;inset:0;z-index:999;background:rgba(3,7,20,.82);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.av-modal-overlay.open{opacity:1;pointer-events:all}
+.av-modal-box{background:#0a1535;border:1px solid rgba(167,139,250,.2);border-radius:20px;padding:40px 36px;width:min(420px,92vw);position:relative;transform:translateY(20px);transition:transform .3s}
+.av-modal-overlay.open .av-modal-box{transform:translateY(0)}
+.av-modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:#a8bfd8;font-size:20px;cursor:pointer;opacity:.6;transition:opacity .2s}
+.av-modal-close:hover{opacity:1}
+.av-modal-kicker{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.28em;color:var(--violet);margin-bottom:12px}
+.av-modal-title{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;letter-spacing:.06em;color:#fff;margin-bottom:6px}
+.av-modal-sub{font-size:14px;color:#a8bfd8;margin-bottom:28px;line-height:1.6}
+.av-field{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.15);border-radius:10px;padding:13px 16px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:15px;outline:none;transition:border-color .2s;margin-bottom:14px}
+.av-field:focus{border-color:rgba(167,139,250,.45)}
+.av-field::placeholder{color:#6a80a8}
+.av-submit-btn{width:100%;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.14em;color:#fff;background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(167,139,250,.12));border:1px solid rgba(167,139,250,.5);border-radius:999px;padding:14px;cursor:pointer;transition:all .25s;margin-top:4px}
+.av-submit-btn:hover:not(:disabled){background:linear-gradient(135deg,rgba(167,139,250,.45),rgba(167,139,250,.22));box-shadow:0 0 28px rgba(167,139,250,.3)}
+.av-submit-btn:disabled{opacity:.5;cursor:not-allowed}
+.av-error{font-size:15px;color:#ff5fa0;margin-top:8px;min-height:18px;text-align:center}
+.av-modal-footer{font-size:12px;color:#a8bfd8;text-align:center;margin-top:16px}
+.av-modal-footer a{color:var(--violet);text-decoration:none}
+
+.karma-toast{position:fixed;bottom:32px;right:32px;z-index:9999;background:#0a1535;border:1px solid rgba(167,139,250,.35);border-radius:14px;padding:16px 22px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 40px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:transform .35s,opacity .35s;pointer-events:none}
+.karma-toast.show{transform:translateY(0);opacity:1}
+.kt-icon{font-size:28px}
+.kt-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:#a8bfd8;display:block}
+.kt-amount{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;color:var(--violet);letter-spacing:.04em;display:block}
+
+/* Join beam button states */
+.beam-join-btn{transition:all .25s}
+.beam-join-btn:disabled{opacity:.5;cursor:not-allowed}
+.beam-join-btn.loading{opacity:.7}
+
+/* Healer registration card */
+.healer-register-band{max-width:960px;margin:40px auto 0;background:linear-gradient(135deg,rgba(167,139,250,.07),rgba(10,21,53,.97));border:1px solid rgba(167,139,250,.2);border-radius:20px;padding:40px 36px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.hr-text h3{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;letter-spacing:.06em;color:#fff;margin-bottom:10px}
+.hr-text p{font-size:15px;color:#a8bfd8;line-height:1.65}
+.hr-karma{text-align:center;flex-shrink:0}
+.hr-karma-num{font-family:'Orbitron',sans-serif;font-size:36px;font-weight:900;color:var(--violet);display:block;text-shadow:0 0 24px rgba(167,139,250,.4)}
+.hr-karma-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:#a8bfd8;display:block;margin-top:2px;margin-bottom:14px}
+.needs-login-note{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.14em;color:#6a80a8;text-align:center;margin-top:14px}
+@media(max-width:600px){.healer-register-band{grid-template-columns:1fr}.hr-karma{display:none}}
+@media(max-width:520px){.karma-toast{bottom:16px;right:16px;left:16px}}
+</style>
+
+<!-- Connect modal -->
+<div class="av-modal-overlay" id="av-modal">
+  <div class="av-modal-box">
+    <button class="av-modal-close" id="av-modal-close">✕</button>
+    <div class="av-modal-kicker">OASIS WEB4 API</div>
+    <div class="av-modal-title">Connect Your Avatar</div>
+    <p class="av-modal-sub">Sign in with your OASIS avatar to join Love Beams, earn violet karma and have every healing act recorded permanently on the blockchain.</p>
+    <input class="av-field" id="av-username" type="email" placeholder="Email address" autocomplete="username">
+    <input class="av-field" id="av-password" type="password" placeholder="Password" autocomplete="current-password">
+    <button class="av-submit-btn" id="av-login-btn">CONNECT AVATAR →</button>
+    <div class="av-error" id="av-error"></div>
+    <p class="av-modal-footer">No avatar? <a href="https://oportal.oasisomniverse.one" target="_blank" rel="noopener">Create one free at OPORTAL →</a></p>
+  </div>
+</div>
+
+<!-- Karma toast -->
+<div class="karma-toast" id="karma-toast">
+  <span class="kt-icon" id="kt-icon">💜</span>
+  <div class="kt-body">
+    <span class="kt-label" id="kt-label">VIOLET KARMA EARNED</span>
+    <span class="kt-amount" id="kt-amount">+250</span>
+  </div>
+</div>
+
+<!-- Healer registration panel (injected after directory preview) -->
+<script>
+(function(){
+  const dirBtn = document.querySelector('#directory ~ * .btn-primary, #directory .btn-primary');
+  if(!dirBtn) return;
+  const band = document.createElement('div');
+  band.className = 'healer-register-band';
+  band.id = 'healer-register-band';
+  band.innerHTML = `
+    <div class="hr-text">
+      <h3>Register as a Healer</h3>
+      <p>Are you a practising healer? Register on the Global Healing Network to be discovered by people in need — and earn +500 violet karma for completing healer verification.</p>
+      <button class="btn-primary beam-join-btn" id="btn-register-healer" disabled style="margin-top:18px;border:none;cursor:pointer">CONNECT AVATAR TO REGISTER</button>
+      <p class="needs-login-note" id="healer-login-note" style="margin-top:10px">Connect your OASIS avatar to register as a healer</p>
+    </div>
+    <div class="hr-karma">
+      <span class="hr-karma-num">+500</span>
+      <span class="hr-karma-label">VIOLET KARMA</span>
+    </div>
+  `;
+  const section = document.getElementById('directory');
+  if(section) section.querySelector('.section')
+    ? section.querySelector('.section').appendChild(band)
+    : section.appendChild(band);
+})();
+</script>
+
+<script type="module">
+import { OASISClient } from 'https://esm.sh/@oasisomniverse/web4-api@2.0.2';
+
+const BASE_URL = 'https://api.web4.oasisomniverse.one';
+const oasis = new OASISClient({ baseUrl: BASE_URL, persistSession: true });
+
+let session = null;
+let avatarKarma = 0;
+
+const modal       = document.getElementById('av-modal');
+const modalClose  = document.getElementById('av-modal-close');
+const usernameEl  = document.getElementById('av-username');
+const passwordEl  = document.getElementById('av-password');
+const loginBtn    = document.getElementById('av-login-btn');
+const errorEl     = document.getElementById('av-error');
+const toast       = document.getElementById('karma-toast');
+const toastIcon   = document.getElementById('kt-icon');
+const toastLabel  = document.getElementById('kt-label');
+const toastAmount = document.getElementById('kt-amount');
+
+// ── Inject connect button into nav ──
+const navCta = document.querySelector('.nav-cta');
+if(navCta){
+  const connectBtn = document.createElement('button');
+  connectBtn.className = 'av-connect-btn';
+  connectBtn.id = 'av-connect-btn';
+  connectBtn.textContent = '⬡ CONNECT AVATAR';
+  navCta.closest('.nav-right').appendChild(connectBtn);
+  connectBtn.addEventListener('click', openModal);
+
+  const badge = document.createElement('div');
+  badge.className = 'av-connected-badge';
+  badge.id = 'av-badge';
+  badge.innerHTML = `
+    <span class="av-avatar-name" id="av-avatar-name">—</span>
+    <span class="av-karma-pill" id="av-karma-pill" title="Your violet karma">💜 0</span>
+    <button class="av-logout-btn" id="av-logout-btn" title="Disconnect">✕</button>
+  `;
+  navCta.closest('.nav-right').appendChild(badge);
+  document.getElementById('av-logout-btn').addEventListener('click', logout);
+  document.getElementById('av-karma-pill').addEventListener('click', refreshKarma);
+}
+
+// ── Modal ──
+function openModal(){ modal.classList.add('open'); usernameEl.focus(); }
+function closeModal(){ modal.classList.remove('open'); errorEl.textContent=''; }
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+loginBtn.addEventListener('click', doLogin);
+[usernameEl, passwordEl].forEach(el=>el.addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); }));
+
+async function doLogin(){
+  const username = usernameEl.value.trim();
+  const password = passwordEl.value;
+  if(!username||!password){ errorEl.textContent='Please enter your email and password.'; return; }
+  loginBtn.disabled=true; loginBtn.textContent='CONNECTING…'; errorEl.textContent='';
+  try {
+    const res = await oasis.auth.login({ username, password });
+    if(res.isError) throw new Error(res.message||'Login failed');
+    session = res.session||res.result;
+    closeModal();
+    await onConnected();
+  } catch(err){
+    errorEl.textContent = err.message||'Could not connect. Please check your credentials.';
+  } finally {
+    loginBtn.disabled=false; loginBtn.textContent='CONNECT AVATAR →';
+  }
+}
+
+async function onConnected(){
+  document.getElementById('av-connect-btn').style.display='none';
+  document.getElementById('av-badge').classList.add('show');
+  const name = session?.avatarUsername||session?.username||session?.firstName||'Avatar';
+  document.getElementById('av-avatar-name').textContent=name;
+  await refreshKarma();
+  enableBeamButtons();
+  enableHealerRegistration();
+}
+
+async function refreshKarma(){
+  if(!session) return;
+  try {
+    const res = await oasis.karma.getKarmaForAvatar({ avatarId: session.avatarId });
+    if(!res.isError){
+      avatarKarma = res.result?.karmaTotal??res.result??avatarKarma;
+      document.getElementById('av-karma-pill').textContent=`💜 ${avatarKarma.toLocaleString()}`;
+    }
+  } catch(_){}
+}
+
+// ── Wire "Join This Beam" buttons ──
+function enableBeamButtons(){
+  // Map buttons to their karma amounts and labels
+  const beamDefs = [
+    { karmaAmount:250, karmaSource:'JoinLoveBeam', title:'Joined a Love Beam', desc:'Sent distance healing through the Global Healing Network Love Beam' },
+    { karmaAmount:300, karmaSource:'JoinAnimalLoveBeam', title:'Sent Animal Healing', desc:'Sent distance healing to rescue animals in Noah\'s Ark ARN healing centres' },
+  ];
+  document.querySelectorAll('.live-beam-band .btn-rose, .live-beam-band .btn-primary').forEach((btn, i)=>{
+    btn.classList.add('beam-join-btn');
+    const def = beamDefs[i] || beamDefs[0];
+    btn.addEventListener('click', async ()=>{
+      if(!session){ openModal(); return; }
+      btn.disabled=true; btn.classList.add('loading');
+      const orig = btn.textContent; btn.textContent='JOINING…';
+      try {
+        const res = await oasis.avatar.addKarmaToAvatar({
+          avatarId: session.avatarId,
+          karmaSource: def.karmaSource,
+          karmaSourceTitle: def.title,
+          karmaSourceDesc: def.desc,
+          karmaAmount: def.karmaAmount,
+        });
+        if(res.isError) throw new Error(res.message);
+        avatarKarma += def.karmaAmount;
+        document.getElementById('av-karma-pill').textContent=`💜 ${avatarKarma.toLocaleString()}`;
+        showToast('💜','BEAM JOINED',`+${def.karmaAmount}`);
+        btn.textContent='✓ JOINED';
+        setTimeout(()=>{ btn.disabled=false; btn.classList.remove('loading'); btn.textContent=orig; }, 4000);
+      } catch(err){
+        showToast('⚠️','ERROR', err.message||'Please try again');
+        btn.disabled=false; btn.classList.remove('loading'); btn.textContent=orig;
+      }
+    });
+  });
+}
+
+// ── Healer registration ──
+function enableHealerRegistration(){
+  const btn = document.getElementById('btn-register-healer');
+  const note = document.getElementById('healer-login-note');
+  if(!btn) return;
+  if(note) note.style.display='none';
+  btn.disabled=false; btn.textContent='REGISTER AS A HEALER (+500 KARMA)';
+  btn.addEventListener('click', async ()=>{
+    btn.disabled=true; btn.classList.add('loading'); btn.textContent='REGISTERING…';
+    try {
+      const res = await oasis.avatar.addKarmaToAvatar({
+        avatarId: session.avatarId,
+        karmaSource: 'HealerVerification',
+        karmaSourceTitle: 'Verified Healer',
+        karmaSourceDesc: 'Completed healer verification on the Global Healing Network',
+        karmaAmount: 500,
+      });
+      if(res.isError) throw new Error(res.message);
+      avatarKarma += 500;
+      document.getElementById('av-karma-pill').textContent=`💜 ${avatarKarma.toLocaleString()}`;
+      showToast('🌟','HEALER VERIFIED','+500');
+      btn.textContent='✓ REGISTERED AS HEALER';
+    } catch(err){
+      showToast('⚠️','ERROR', err.message||'Please try again');
+      btn.disabled=false; btn.classList.remove('loading'); btn.textContent='REGISTER AS A HEALER (+500 KARMA)';
+    }
+  });
+}
+
+// ── Submit Love Beam (CTA button) ──
+document.querySelectorAll('a[href="#lovebeam"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    if(e.target.closest('.nav-links')) return;
+    if(!session){ e.preventDefault(); openModal(); }
+  });
+});
+
+// ── Logout ──
+function logout(){
+  oasis.auth.logout().catch(()=>{});
+  session=null; avatarKarma=0;
+  document.getElementById('av-connect-btn').style.display='';
+  document.getElementById('av-badge').classList.remove('show');
+  const btn=document.getElementById('btn-register-healer');
+  const note=document.getElementById('healer-login-note');
+  if(btn){ btn.disabled=true; btn.textContent='CONNECT AVATAR TO REGISTER'; }
+  if(note) note.style.display='';
+}
+
+// ── Toast ──
+let toastTimer;
+function showToast(icon,label,amount){
+  toastIcon.textContent=icon; toastLabel.textContent=label; toastAmount.textContent=amount;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),3500);
+}
+
+// ── Check persisted session on load ──
+(async()=>{
+  try {
+    const auth = await oasis.auth.isAuthenticated();
+    if(auth?.isAuthenticated||auth?.result?.isAuthenticated){
+      session=auth.session||auth.result?.session||auth.result;
+      if(session?.avatarId) await onConnected();
+    }
+  } catch(_){}
+})();
+</script>
+</body>
+</html>
