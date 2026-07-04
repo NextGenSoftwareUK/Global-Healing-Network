@@ -133,7 +133,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:fl
 .lb-step-num{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:var(--rose);min-width:28px;flex-shrink:0}
 .lb-step-body h4{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--rose);margin-bottom:3px}
 .lb-step-body p{font-size:14px;color:#a8bfd8;line-height:1.6}
-#lovebeam-canvas{width:100%;max-width:460px;display:block}
+#lovebeam-canvas{width:100%;display:block}
 @media(max-width:820px){
   .lovebeam-layout{grid-template-columns:1fr}
   #lovebeam-canvas{max-width:100%;order:-1}
@@ -454,7 +454,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
           </div>
         </div>
       </div>
-      <canvas id="lovebeam-canvas" width="460" height="460"></canvas>
+      <canvas id="lovebeam-canvas"></canvas>
     </div>
   </div>
 </section>
@@ -923,15 +923,13 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
   const cv=document.getElementById('lovebeam-canvas');
   if(!cv)return;
   const ctx=cv.getContext('2d');
-  const W=460,H=460;
-  cv.width=W;cv.height=H;
-  const cx=W/2,cy=H/2;
 
-  const rings=[50,90,130,170,200];
+  let W,H,cx,cy,S;
+  function resizeLB(){W=cv.parentElement.clientWidth||460;H=W;cv.width=W;cv.height=H;cx=W/2;cy=H/2;S=W/460;}
+  resizeLB();window.addEventListener('resize',resizeLB);
+
   const beamAngles=[0,45,90,135,180,225,270,315].map(a=>a*Math.PI/180);
   const beamColors=['rgba(167,139,250,1)','rgba(255,95,160,1)','rgba(167,139,250,1)','rgba(255,95,160,1)','rgba(0,232,124,1)','rgba(167,139,250,1)','rgba(255,95,160,1)','rgba(167,139,250,1)'];
-
-  // Pulses converging inward toward centre
   const pulses=beamAngles.map((a,i)=>({a,t:Math.random(),speed:.006+Math.random()*.004,color:beamColors[i]}));
 
   let t=0;
@@ -939,52 +937,47 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
     t++;
     ctx.clearRect(0,0,W,H);
 
-    // Outer glow
     const pulse=0.5+0.5*Math.sin(t*.04);
-    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,210);
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,210*S);
     grd.addColorStop(0,'rgba(167,139,250,.14)');
     grd.addColorStop(.5,'rgba(255,95,160,.07)');
     grd.addColorStop(1,'transparent');
-    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,210,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,210*S,0,Math.PI*2);ctx.fill();
 
-    // Concentric rings
-    rings.forEach((r,i)=>{
-      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+    [50,90,130,170,200].forEach((r,i)=>{
+      ctx.beginPath();ctx.arc(cx,cy,r*S,0,Math.PI*2);
       ctx.strokeStyle=`rgba(167,139,250,${.05+i*.02})`;
       ctx.lineWidth=1;ctx.setLineDash([3,6]);ctx.stroke();ctx.setLineDash([]);
     });
 
-    // Beam lines
-    beamAngles.forEach((a,i)=>{
+    beamAngles.forEach(a=>{
       ctx.beginPath();ctx.moveTo(cx,cy);
-      ctx.lineTo(cx+Math.cos(a)*210,cy+Math.sin(a)*210);
+      ctx.lineTo(cx+Math.cos(a)*210*S,cy+Math.sin(a)*210*S);
       ctx.strokeStyle='rgba(167,139,250,.07)';ctx.lineWidth=1;ctx.stroke();
     });
 
-    // Pulses converging inward
     pulses.forEach(p=>{
       p.t-=p.speed;
       if(p.t<0)p.t=1;
-      const dist=p.t*200+10;
+      const dist=(p.t*200+10)*S;
       const px=cx+Math.cos(p.a)*dist;
       const py=cy+Math.sin(p.a)*dist;
       const fade=Math.min((1-p.t)*5,1)*Math.min(p.t*3,1);
-      const grd2=ctx.createRadialGradient(px,py,0,px,py,9);
+      const grd2=ctx.createRadialGradient(px,py,0,px,py,9*S);
       grd2.addColorStop(0,p.color.replace('1)',`${fade})`));
       grd2.addColorStop(1,'transparent');
-      ctx.fillStyle=grd2;ctx.beginPath();ctx.arc(px,py,9,0,Math.PI*2);ctx.fill();
-      ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${fade*.85})`;ctx.fill();
+      ctx.fillStyle=grd2;ctx.beginPath();ctx.arc(px,py,9*S,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.arc(px,py,3*S,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${fade*.85})`;ctx.fill();
     });
 
-    // Centre target
     const cp=0.5+0.5*Math.sin(t*.07);
-    const cgrd=ctx.createRadialGradient(cx,cy,0,cx,cy,40+8*cp);
+    const cgrd=ctx.createRadialGradient(cx,cy,0,cx,cy,(40+8*cp)*S);
     cgrd.addColorStop(0,'rgba(255,95,160,.4)');cgrd.addColorStop(.5,'rgba(167,139,250,.2)');cgrd.addColorStop(1,'transparent');
-    ctx.fillStyle=cgrd;ctx.beginPath();ctx.arc(cx,cy,40+8*cp,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.arc(cx,cy,26,0,Math.PI*2);
+    ctx.fillStyle=cgrd;ctx.beginPath();ctx.arc(cx,cy,(40+8*cp)*S,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,26*S,0,Math.PI*2);
     ctx.fillStyle='rgba(12,6,30,.97)';ctx.fill();
     ctx.strokeStyle='rgba(255,95,160,.5)';ctx.lineWidth=2;ctx.stroke();
-    ctx.font='22px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('💜',cx,cy);
+    ctx.font=`${Math.round(22*S)}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('💜',cx,cy);
 
     requestAnimationFrame(draw);
   }
