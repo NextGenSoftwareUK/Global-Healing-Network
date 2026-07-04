@@ -1088,8 +1088,7 @@ document.querySelectorAll('.filter-pill').forEach(btn=>{
     <div class="hr-text">
       <h3>Register as a Healer</h3>
       <p>Are you a practising healer? Register on the Global Healing Network to be discovered by people in need — and earn +500 violet karma for completing healer verification.</p>
-      <button class="btn-primary beam-join-btn" id="btn-register-healer" disabled style="margin-top:18px;border:none;cursor:pointer">CONNECT AVATAR TO REGISTER</button>
-      <p class="needs-login-note" id="healer-login-note" style="margin-top:10px">Connect your OASIS avatar to register as a healer</p>
+      <button class="btn-primary beam-join-btn" id="btn-register-healer" style="margin-top:18px;border:none;cursor:pointer">REGISTER AS A HEALER (+500 KARMA)</button>
     </div>
     <div class="hr-karma">
       <span class="hr-karma-num">+500</span>
@@ -1111,6 +1110,7 @@ const oasis = new OASISClient({ baseUrl: BASE_URL, persistSession: true });
 
 let session = null;
 let avatarKarma = 0;
+let pendingAction = null;
 
 const modal       = document.getElementById('av-modal');
 const modalClose  = document.getElementById('av-modal-close');
@@ -1181,7 +1181,7 @@ async function onConnected(){
   document.getElementById('av-avatar-name').textContent=name;
   await refreshKarma();
   enableBeamButtons();
-  enableHealerRegistration();
+  if(pendingAction){const a=pendingAction;pendingAction=null;a();}
 }
 
 async function refreshKarma(){
@@ -1232,33 +1232,38 @@ function enableBeamButtons(){
 }
 
 // ── Healer registration ──
-function enableHealerRegistration(){
+async function doRegisterHealer(){
   const btn = document.getElementById('btn-register-healer');
-  const note = document.getElementById('healer-login-note');
   if(!btn) return;
-  if(note) note.style.display='none';
-  btn.disabled=false; btn.textContent='REGISTER AS A HEALER (+500 KARMA)';
-  btn.addEventListener('click', async ()=>{
-    btn.disabled=true; btn.classList.add('loading'); btn.textContent='REGISTERING…';
-    try {
-      const res = await oasis.avatar.addKarmaToAvatar({
-        avatarId: session.avatarId,
-        karmaSource: 'HealerVerification',
-        karmaSourceTitle: 'Verified Healer',
-        karmaSourceDesc: 'Completed healer verification on the Global Healing Network',
-        karmaAmount: 500,
-      });
-      if(res.isError) throw new Error(res.message);
-      avatarKarma += 500;
-      document.getElementById('av-karma-pill').textContent=`💜 ${avatarKarma.toLocaleString()}`;
-      showToast('🌟','HEALER VERIFIED','+500');
-      btn.textContent='✓ REGISTERED AS HEALER';
-    } catch(err){
-      showToast('⚠️','ERROR', err.message||'Please try again');
-      btn.disabled=false; btn.classList.remove('loading'); btn.textContent='REGISTER AS A HEALER (+500 KARMA)';
-    }
-  });
+  btn.disabled=true; btn.classList.add('loading'); btn.textContent='REGISTERING…';
+  try {
+    const res = await oasis.avatar.addKarmaToAvatar({
+      avatarId: session.avatarId,
+      karmaSource: 'HealerVerification',
+      karmaSourceTitle: 'Verified Healer',
+      karmaSourceDesc: 'Completed healer verification on the Global Healing Network',
+      karmaAmount: 500,
+    });
+    if(res.isError) throw new Error(res.message);
+    avatarKarma += 500;
+    document.getElementById('av-karma-pill').textContent=`💜 ${avatarKarma.toLocaleString()}`;
+    showToast('🌟','HEALER VERIFIED','+500');
+    btn.textContent='✓ REGISTERED AS HEALER';
+  } catch(err){
+    showToast('⚠️','ERROR', err.message||'Please try again');
+    btn.disabled=false; btn.classList.remove('loading'); btn.textContent='REGISTER AS A HEALER (+500 KARMA)';
+  }
 }
+
+// Set up healer btn listener once at page load (btn is in DOM via earlier script)
+(function(){
+  const btn = document.getElementById('btn-register-healer');
+  if(!btn) return;
+  btn.addEventListener('click', ()=>{
+    if(!session?.avatarId){ pendingAction=doRegisterHealer; openModal(); return; }
+    doRegisterHealer();
+  });
+})();
 
 // ── Submit Love Beam (CTA button) ──
 document.querySelectorAll('a[href="#lovebeam"]').forEach(a=>{
@@ -1275,9 +1280,7 @@ function logout(){
   document.getElementById('av-connect-btn').style.display='';
   document.getElementById('av-badge').classList.remove('show');
   const btn=document.getElementById('btn-register-healer');
-  const note=document.getElementById('healer-login-note');
-  if(btn){ btn.disabled=true; btn.textContent='CONNECT AVATAR TO REGISTER'; }
-  if(note) note.style.display='';
+  if(btn && btn.textContent!=='✓ REGISTERED AS HEALER') btn.textContent='REGISTER AS A HEALER (+500 KARMA)';
 }
 
 // ── Toast ──
