@@ -239,7 +239,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
 
 /* ── RESPONSIVE ── */
 @media(max-width:520px){
-  .section,.section-full{padding:80px .75rem.section-inner{padding:0 .75rem}.lovebeam-layout,.live-beam-inner{grid-template-columns:1fr}}
+  .section,.section-full{padding:80px .75rem}.section-inner{padding:0 .75rem}.lovebeam-layout,.live-beam-inner{grid-template-columns:1fr}
   nav{padding:14px 18px}
   .hero{padding:100px .75rem 60px}
   .stats-band{padding:40px .75rem}
@@ -248,7 +248,12 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
   .live-beam-band{padding:32px 18px}
   .integration-band,.narn-band{padding:36px 20px}
 }
-</style>
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:none;cursor:pointer;z-index:101;flex-shrink:0;margin-left:auto}
+.nav-toggle span{display:block;width:100%;height:2px;background:#a8bfd8;transition:transform .25s,opacity .25s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:860px){.nav-toggle{display:flex}.nav-right{display:none}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:20px;padding:80px 32px 24px;overflow-y:auto;background:rgba(3,7,20,.97);backdrop-filter:blur(12px);border-left:1px solid rgba(168,85,247,.15);transform:translateX(100%);transition:transform .3s ease;z-index:99;margin-left:0}.nav-links.open{transform:translateX(0)}}</style>
 </head>
 <body>
 <div id="wip-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(3,7,20,.96);border-top:1px solid rgba(0,229,255,.18);padding:9px 20px;display:flex;align-items:center;justify-content:center;gap:14px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.07em;color:#a8bfd8;text-align:center"><span>&#x1F6A7;&nbsp;<strong style="color:#00e5ff">WORK IN PROGRESS</strong>&nbsp;&mdash; This site is actively being built so not everything is fully functional yet. Please bear with us and check back often for the latest updates!</span><button onclick="this.parentElement.style.display='none'" style="background:none;border:1px solid rgba(0,229,255,.25);color:#a8bfd8;font-family:inherit;font-size:10px;letter-spacing:.08em;padding:4px 10px;border-radius:4px;cursor:pointer;flex-shrink:0">DISMISS</button></div>
@@ -275,7 +280,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
     <li><a href="#noahsark">Noah's Ark</a></li>
     <li class="nav-links-mobile-only"><a href="#lovebeam">Join a Love Beam</a></li>
   </ul>
-  <div class="nav-right"><a class="nav-cta" href="#lovebeam">💜 Join a Love Beam</a></div>
+  <div class="nav-right"><a class="nav-cta" href="#lovebeam">💜 Join a Love Beam</a><button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div>
 </nav>
 
 <!-- HERO -->
@@ -1047,7 +1052,12 @@ document.querySelectorAll('.filter-pill').forEach(btn=>{
 .needs-login-note{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.14em;color:#6a80a8;text-align:center;margin-top:14px}
 @media(max-width:600px){.healer-register-band{grid-template-columns:1fr}.hr-karma{display:none}}
 @media(max-width:520px){.karma-toast{bottom:16px;right:16px;left:16px.section-inner{padding:0 .75rem}.lovebeam-layout,.live-beam-inner{grid-template-columns:1fr}}}
-</style>
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:none;cursor:pointer;z-index:101;flex-shrink:0;margin-left:auto}
+.nav-toggle span{display:block;width:100%;height:2px;background:#a8bfd8;transition:transform .25s,opacity .25s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:860px){.nav-toggle{display:flex}.nav-right{display:none}.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:20px;padding:80px 32px 24px;overflow-y:auto;background:rgba(3,7,20,.97);backdrop-filter:blur(12px);border-left:1px solid rgba(168,85,247,.15);transform:translateX(100%);transition:transform .3s ease;z-index:99;margin-left:0}.nav-links.open{transform:translateX(0)}}</style>
 
 <!-- Connect modal -->
 <div class="av-modal-overlay" id="av-modal">
@@ -1297,5 +1307,5 @@ function showToast(icon,label,amount){
   } catch(_){}
 })();
 </script>
-</body>
+<script>(function(){var t=document.getElementById("nav-toggle");var l=document.getElementById("nav-links");if(!t||!l)return;t.addEventListener("click",function(){t.classList.toggle("open");l.classList.toggle("open")});l.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){t.classList.remove("open");l.classList.remove("open")})})})();</script></body>
 </html>
