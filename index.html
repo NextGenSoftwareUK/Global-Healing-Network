@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -813,11 +812,11 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
   let W,H,cx,cy,globeR,nodeR,healerNodes;
   function resize(){
     W=cv.parentElement.clientWidth||innerWidth;
-    H=Math.round(W*1.04);
+    H=Math.round(W*1.8);
     cv.width=W;cv.height=H;
     cx=W/2;cy=H/2;
-    globeR=Math.round(Math.min(W,H)*0.18);
-    nodeR=globeR+Math.round(globeR*0.65);
+    globeR=Math.round(Math.min(W,H)*0.28);
+    nodeR=globeR+Math.round(globeR*0.55);
     healerNodes=nodeAngles.map((a,i)=>({
       x:cx+Math.cos(a)*nodeR,y:cy+Math.sin(a)*nodeR,
       color:nodeColors[i],icon:nodeIcons[i],angle:a
@@ -1308,5 +1307,5 @@ function showToast(icon,label,amount){
   } catch(_){}
 })();
 </script>
-<script>(function(){var t=document.getElementById("nav-toggle");var l=document.getElementById("nav-links");if(!t||!l)return;t.addEventListener("click",function(){t.classList.toggle("open");l.classList.toggle("open")});l.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){t.classList.remove("open");l.classList.remove("open")})})})();</script></body>
+</body>
 </html>
