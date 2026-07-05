@@ -455,6 +455,10 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
             </div>
           </div>
         </div>
+        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+          <button id="btn-lovebeam-section" class="btn-rose" style="border:none;cursor:pointer;font-size:15px">💜 Join a Live Beam →</button>
+          <a class="btn-secondary" href="#live-beams" style="font-size:15px">See Active Sessions ↓</a>
+        </div>
       </div>
       <canvas id="lovebeam-canvas"></canvas>
     </div>
@@ -462,7 +466,7 @@ footer{position:relative;z-index:1;border-top:1px solid rgba(167,139,250,.1);pad
 </section>
 
 <!-- LIVE BEAM EXAMPLE -->
-<section class="section">
+<section class="section" id="live-beams">
   <div class="section-kicker rose">LIVE RIGHT NOW</div>
   <h2 class="section-title">Active Love Beam Sessions</h2>
   <span class="section-line rose"></span>
@@ -1180,6 +1184,10 @@ async function doLogin(){
 async function onConnected(){
   document.getElementById('av-connect-btn').style.display='none';
   document.getElementById('av-badge').classList.add('show');
+  if(pendingBeamScroll){
+    pendingBeamScroll=false;
+    setTimeout(()=>document.getElementById('live-beams').scrollIntoView({behavior:'smooth'}),300);
+  }
   const name = session?.avatarUsername||session?.username||session?.firstName||'Avatar';
   document.getElementById('av-avatar-name').textContent=name;
   await refreshKarma();
@@ -1269,11 +1277,17 @@ async function doRegisterHealer(){
 })();
 
 // ── Submit Love Beam (CTA button) ──
+let pendingBeamScroll=false;
 document.querySelectorAll('a[href="#lovebeam"]').forEach(a=>{
   a.addEventListener('click', e=>{
     if(e.target.closest('.nav-links')) return;
-    if(!session){ e.preventDefault(); openModal(); }
+    if(!session){ e.preventDefault(); pendingBeamScroll=true; openModal(); }
   });
+});
+const lbSectionBtn=document.getElementById('btn-lovebeam-section');
+if(lbSectionBtn) lbSectionBtn.addEventListener('click',()=>{
+  if(!session){ pendingBeamScroll=true; openModal(); }
+  else{ document.getElementById('live-beams').scrollIntoView({behavior:'smooth'}); }
 });
 
 // ── Logout ──
