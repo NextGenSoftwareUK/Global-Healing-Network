@@ -1270,10 +1270,7 @@ async function doRegisterHealer(){
 (function(){
   const btn = document.getElementById('btn-register-healer');
   if(!btn) return;
-  btn.addEventListener('click', ()=>{
-    if(!session?.avatarId){ pendingAction=doRegisterHealer; openModal(); return; }
-    doRegisterHealer();
-  });
+  btn.addEventListener('click', ()=>{ document.getElementById('healer-reg-modal').style.display='flex'; });
 })();
 
 // ── Submit Love Beam (CTA button) ──
@@ -1320,6 +1317,35 @@ function showToast(icon,label,amount){
   } catch(_){}
 })();
 </script>
+
+<!-- REGISTER AS HEALER MODAL -->
+<div id="healer-reg-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(3,7,20,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:#0a1535;border:1px solid rgba(167,139,250,.25);border-radius:20px;padding:40px 36px;max-width:540px;width:100%;position:relative;max-height:90vh;overflow-y:auto">
+    <button onclick="document.getElementById('healer-reg-modal').style.display='none'" style="position:absolute;top:16px;right:18px;background:none;border:none;color:#a8bfd8;font-size:20px;cursor:pointer;line-height:1">✕</button>
+    <div style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--violet);letter-spacing:.12em;margin-bottom:10px">🌟 HEALER REGISTRATION</div>
+    <h2 style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:#fff;margin:0 0 6px">Register as a Healer</h2>
+    <p style="font-size:15px;color:#a8bfd8;margin:0 0 24px;line-height:1.6">Tell us about your healing practice and we'll list you in the Global Healing Network directory. You'll earn <strong style="color:var(--violet)">+500 violet karma</strong> once your profile is verified.</p>
+    <form id="healer-reg-form" action="https://formsubmit.co/davidellams@hotmail.com" method="POST" style="display:flex;flex-direction:column;gap:14px">
+      <input type="hidden" name="_subject" value="GHN — Healer Registration">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="name" required placeholder="Your full name" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box">
+      <input type="email" name="email" required placeholder="your@email.com" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box">
+      <input type="text" name="location" required placeholder="City / Country" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box">
+      <select name="modality" required style="width:100%;background:rgba(3,7,20,.9);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box">
+        <option value="" disabled selected>Primary healing modality…</option>
+        <option>Reiki</option><option>Pranic Healing</option><option>Shamanic Healing</option><option>Energy Healing</option><option>Sound Healing</option><option>Crystal Healing</option><option>Meditation / Mindfulness</option><option>Theta Healing</option><option>Quantum Healing</option><option>Emotional Freedom Technique (EFT)</option><option>Acupuncture / Acupressure</option><option>Breathwork</option><option>Multiple / Other</option>
+      </select>
+      <select name="experience" required style="width:100%;background:rgba(3,7,20,.9);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box">
+        <option value="" disabled selected>Years of experience…</option>
+        <option>Less than 1 year</option><option>1–3 years</option><option>3–5 years</option><option>5–10 years</option><option>10+ years</option>
+      </select>
+      <textarea name="about" rows="3" required placeholder="Briefly describe your practice and how you help people…" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;resize:vertical"></textarea>
+      <input type="text" name="website" placeholder="Website or social profile (optional)" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.2);border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;box-sizing:border-box">
+      <button type="submit" class="btn-primary" style="border:none;cursor:pointer;font-size:15px;margin-top:4px">REGISTER AS A HEALER (+500 KARMA) →</button>
+    </form>
+  </div>
+</div>
 
 <!-- JOIN BEAM MODAL -->
 <div id="beam-modal" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(3,7,20,.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px">
@@ -1419,6 +1445,27 @@ function openBeamModal(btn){
           +rows.filter(([,v])=>v).map(([k,v])=>`<div><span style="color:#a8bfd8;letter-spacing:.08em">${k}:</span> <span style="color:#fff">${v}</span></div>`).join('')+'</div>';
       } else { throw new Error(); }
     } catch(_){ btn.textContent='FIND MY HEALER →';btn.disabled=false;alert('Something went wrong — please try again.'); }
+  });
+})();
+
+// ── Healer registration form ──
+(function(){
+  document.getElementById('healer-reg-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('healer-reg-modal')) document.getElementById('healer-reg-modal').style.display='none'; });
+  const form=document.getElementById('healer-reg-form');
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const fd=new FormData(form);
+    const btn=form.querySelector('[type=submit]');
+    btn.textContent='SENDING…';btn.disabled=true;
+    try{
+      const res=await fetch(form.action,{method:'POST',body:fd,headers:{Accept:'application/json'}});
+      if(res.ok){
+        const rows=[['Name',fd.get('name')],['Email',fd.get('email')],['Location',fd.get('location')],['Modality',fd.get('modality')],['Experience',fd.get('experience')],['About',fd.get('about')],['Website',fd.get('website')]];
+        form.innerHTML='<div style="font-family:\'Share Tech Mono\',monospace;font-size:12px;line-height:2;text-align:left">'
+          +'<div style="color:var(--violet);letter-spacing:.1em;margin-bottom:12px;font-size:13px">✓ REGISTRATION RECEIVED — WE\'LL BE IN TOUCH TO VERIFY YOUR PROFILE</div>'
+          +rows.filter(([,v])=>v).map(([k,v])=>`<div><span style="color:#a8bfd8;letter-spacing:.08em">${k}:</span> <span style="color:#fff">${v}</span></div>`).join('')+'</div>';
+      } else { throw new Error(); }
+    } catch(_){ btn.textContent='REGISTER AS A HEALER (+500 KARMA) →';btn.disabled=false;alert('Something went wrong — please try again.'); }
   });
 })();
 </script>
